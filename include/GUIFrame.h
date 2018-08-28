@@ -40,6 +40,7 @@ uint16_t refreshDeviceState();
 #include <wx/thread.h>
 #include <wx/defs.h>
 #include <wx/sysopt.h>
+#include <wx/listctrl.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <dirent.h>

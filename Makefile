@@ -77,9 +77,9 @@ $(OBJDIR_DEBUG)/src/Smartpen.o: src/Smartpen.cc
 	$(CC) -o $(OBJDIR_DEBUG)/src/Smartpen.o $(CFLAGS_DEBUG) -c src/Smartpen.cc
 
 clean_debug:
-	rm $(OBJ_DEBUG) $(OUT_DEBUG)
-	rm -r ./bin/Debug
-	rm -r $(OBJDIR_DEBUG)/src
+	rm -f $(OBJ_DEBUG) $(OUT_DEBUG)
+	rm -rf ./bin/Debug
+	rm -rf $(OBJDIR_DEBUG)/src
 
 before_release:
 	mkdir -p ./bin/Release
@@ -113,8 +113,8 @@ $(OBJDIR_RELEASE)/src/Smartpen.o: src/Smartpen.cc
 	$(CC) -o $(OBJDIR_RELEASE)/src/Smartpen.o $(CFLAGS_RELEASE) -c src/Smartpen.cc
 
 clean_release:
-	rm $(OBJ_RELEASE) $(OUT_RELEASE)
-	rm -r ./bin/Release
-	rm -r $(OBJDIR_RELEASE)/src
+	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)
+	rm -fr ./bin/Release
+	rm -fr $(OBJDIR_RELEASE)/src
 
 .PHONY: before_build after_build before_debug after_debug clean_debug before_release after_release clean_release

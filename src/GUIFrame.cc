@@ -681,7 +681,8 @@ void GUIFrame::OnClose(wxCloseEvent& event)
 void GUIFrame::OnPageTreeItemMenu(wxTreeEvent& event)
 {
 	wxTreeItemId item = event.GetItem();
-    printf("page tree item context menu request detected. item id: %d\n", static_cast<int>(item));
+        
+        //printf("page tree item context menu request detected. item id: %d\n", static_cast<int>(item));
 	if (item == root) { //the root item is either the smartpen or the placeholder when no pen is connected
         if (dev == NULL) {
             rootItemMenu.Enable(idRootItemMenuRenameDevice,false);
@@ -922,7 +923,7 @@ void GUIFrame::OnPageTreeSelectionChanged(wxTreeEvent& event) {
 	std::string textString = (std::string)itemText.mb_str();
     const char* text = textString.c_str();
     notebookBrowser->ClearAll(); //clear the notebook page browser of all previous data
-    printf("page tree selection changed. id: %d, text: \"%s\"\n", static_cast<int>(item), text);
+    //printf("page tree selection changed. id: %d, text: \"%s\"\n", static_cast<int>(item), text);
     if (item == root) { //the root item is either the smartpen or the placeholder when no pen is connected
         selectedNotebookName->SetLabel(_("No Notebook Selected"));
         currentNotebook = NULL;

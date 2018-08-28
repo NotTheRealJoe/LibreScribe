@@ -170,9 +170,10 @@ Smartpen* Smartpen::connect(short vendor, short product) {
             return smartpen;
         }
 
-        num = OBEX_FindInterfaces(handle, &obex_intf);
+        num = OBEX_EnumerateInterfaces(handle);
         for (i=0; i<num; i++) {
-            if (!strcmp(obex_intf[i].usb.manufacturer, "Livescribe")) {
+            obex_intf = OBEX_GetInterfaceByIndex(handle,i);
+            if (!strcmp((*obex_intf).usb.manufacturer, "Livescribe")) {
                 break;
             }
         }
@@ -192,7 +193,7 @@ Smartpen* Smartpen::connect(short vendor, short product) {
 
         swizzle_usb(vendor, product);
 
-        rc = OBEX_InterfaceConnect(handle, &obex_intf[i]);
+        rc = OBEX_InterfaceConnect(handle, obex_intf);
         if (rc < 0) {
             printf("Sorry! Connecting to your device failed. Miserably. Is it in use already?\n");
             printf("Connect failed %d\n", rc);
@@ -263,7 +264,7 @@ const char* Smartpen::getNamedObject(const char* name, int* len) {
         *wchar = ntohs(*wchar);
     }
     size = (num+1) * sizeof(uint16_t);
-//	printf("Adding name header...\n");
+//  printf("Adding name header...\n");
     OBEX_ObjectAddHeader(handle, obj, OBEX_HDR_NAME, hd, size, OBEX_FL_FIT_ONE_PACKET);
 
     if (OBEX_Request(handle, obj) < 0) {
@@ -561,8 +562,8 @@ void Smartpen::getLspData(const char* object_name, long long int start_time) {
         fclose(out);
         std::string cmd = "unzip -qq -o -d ./data/extracted/" + (std::string)object_name + " ./data/" + (std::string)object_name;
         ok = system(cmd.c_str()); //I know... this is a horrible way to unzip the files, but it's so easy!
-		if (ok == -1) {
-			printf("A problem occured unzipping.\n");
-		}    
-	}
+        if (ok == -1) {
+            printf("A problem occured unzipping.\n");
+        }
+    }
 }

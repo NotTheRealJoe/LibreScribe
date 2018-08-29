@@ -193,7 +193,7 @@ Smartpen* Smartpen::connect(short vendor, short product) {
 
         swizzle_usb(vendor, product);
 
-        rc = OBEX_InterfaceConnect(handle, &obex_intf[i]);
+        rc = OBEX_InterfaceConnect(handle, obex_intf);
         if (rc < 0) {
             printf("Sorry! Connecting to your device failed. Miserably. Is it in use already?\n");
             printf("Connect failed %d\n", rc);

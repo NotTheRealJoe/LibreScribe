@@ -24,7 +24,7 @@ struct libusb_device_handle *findSmartpen() {
     ssize_t cnt; //holding number of devices in list
     printf("initializing libusb...\n");
     libusb_init(&ctx); //initialize a library session
-    libusb_set_debug(ctx, 3); //set verbosity level to 3, as suggested in the documentation
+    libusb_set_option(ctx, LIBUSB_OPTION_LOG_LEVEL, 3); //set verbosity level to 3, as suggested in the documentation
     printf("getting device list...\n");
     cnt = libusb_get_device_list(ctx, &devs); //get the list of devices
     if(cnt >= 0) {
